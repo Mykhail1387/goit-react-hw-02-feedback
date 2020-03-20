@@ -13,37 +13,17 @@ export default class AppHW extends Component {
         bad: 0
     }
 
-    countTotalGood = (e) => {
+    onLeaveFeedback = (e) => {
+        const { name } = e.target
         this.setState(prevState => {
-
             return {
-                good: prevState.good + 1,
-            }
-        })
-    }
-
-    countTotalNeutral = (e) => {
-        this.setState(prevState => {
-
-            return {
-                neutral: prevState.neutral + 1
-            }
-        })
-    }
-
-    countTotalBad = (e) => {
-        this.setState(prevState => {
-
-            return {
-                bad: prevState.bad + 1
+                [name]: prevState[name] + 1,
             }
         })
     }
 
     countTotalFeedback = () => {
-        const { good } = this.state;
-        const { neutral } = this.state;
-        const { bad } = this.state;
+        const { good, neutral, bad } = this.state;
         const result = bad + neutral + good;
 
         return result;
@@ -59,17 +39,16 @@ export default class AppHW extends Component {
     }
 
     render() {
-        const { good } = this.state;
-        const { neutral } = this.state;
-        const { bad } = this.state;
+        const { good, neutral, bad } = this.state;
         const total = this.countTotalFeedback();
         const positivePercentage = this.countPositiveFeedbackPercentage();
+        const objKey = Object.keys(this.state)
 
         return (
             <>
                 <Section title={"Please leave feedback"} />
 
-                <FeedbackOptions onLeaveFeedbackGood={this.countTotalGood} onLeaveFeedbackNeutral={this.countTotalNeutral} onLeaveFeedbackBad={this.countTotalBad} />
+                <FeedbackOptions options={objKey} onLeaveFeedback={this.onLeaveFeedback} />
 
                 <h2 style={{ fontSize: '32px' }}>Statistics</h2>
 

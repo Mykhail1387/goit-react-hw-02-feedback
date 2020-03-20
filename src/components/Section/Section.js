@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 const Section = ({ title }) => (
     <>
         <h2 className={styles.title}>{title}</h2>
-
-
     </>
 )
 
