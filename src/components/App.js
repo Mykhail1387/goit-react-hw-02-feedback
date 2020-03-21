@@ -46,13 +46,14 @@ export default class AppHW extends Component {
 
         return (
             <>
-                <Section title={"Please leave feedback"} />
+                <Section title={"Please leave feedback"} >
+                    {<FeedbackOptions options={objKey} onLeaveFeedback={this.onLeaveFeedback} />}
+                </Section>
 
-                <FeedbackOptions options={objKey} onLeaveFeedback={this.onLeaveFeedback} />
-
-                <h2 style={{ fontSize: '32px' }}>Statistics</h2>
-
-                {total ? <Statistics good={good} neutral={neutral} bad={bad} total={total} positivePercentage={positivePercentage} /> : <Notification message={"No feedback given"} />}
+                <Section title={"Statistics"} >
+                    {!total && <Notification message={"No feedback given"} />}
+                    {<Statistics good={good} neutral={neutral} bad={bad} total={total} positivePercentage={positivePercentage} />}
+                </Section>
             </>
         )
     }
